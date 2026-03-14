@@ -211,7 +211,7 @@ def get_session_metadata_path(session: str) -> Path:
 	return Path(tempfile.gettempdir()) / f'browser-use-{session}.meta'
 
 
-def ensure_server(session: str, browser: str, headed: bool, profile: str | None, api_key: str | None) -> bool:
+def ensure_server(session: str, browser: str, headed: bool, profile: str | None, api_key: str | None, record_video_dir: str | None = None) -> bool:
 	"""Start server if not running. Returns True if started."""
 	from browser_use.skill_cli.utils import is_session_locked, kill_orphaned_server
 
@@ -269,6 +269,8 @@ def ensure_server(session: str, browser: str, headed: bool, profile: str | None,
 		cmd.append('--headed')
 	if profile:
 		cmd.extend(['--profile', profile])
+	if record_video_dir:
+		cmd.extend(['--record-video', record_video_dir])
 
 	# Set up environment
 	env = os.environ.copy()
@@ -310,6 +312,7 @@ def ensure_server(session: str, browser: str, headed: bool, profile: str | None,
 							'browser_mode': browser,
 							'headed': headed,
 							'profile': profile,
+							'record_video_dir': record_video_dir,
 						}
 					)
 				)
@@ -429,6 +432,7 @@ Setup:
 		help=f'Browser mode (available: {", ".join(available_modes)})',
 	)
 	parser.add_argument('--headed', action='store_true', help='Show browser window')
+	parser.add_argument('--record-video', metavar='DIR', help='Record video of the session to the specified directory')
 	parser.add_argument('--profile', help='Browser profile (local name or cloud ID)')
 	parser.add_argument('--json', action='store_true', help='Output as JSON')
 	parser.add_argument('--api-key', help='Browser-Use API key')
@@ -1189,7 +1193,7 @@ def main() -> int:
 		return _handle_remote_run_with_wait(args)
 
 	# Ensure server is running
-	ensure_server(args.session, args.browser, args.headed, args.profile, args.api_key)
+	ensure_server(args.session, args.browser, args.headed, args.profile, args.api_key, args.record_video)
 
 	# Build params from args
 	params = {}

@@ -35,11 +35,13 @@ class SessionServer:
 		browser_mode: str,
 		headed: bool,
 		profile: str | None,
+		record_video_dir: str | None = None,
 	) -> None:
 		self.session_name = session_name
 		self.browser_mode = browser_mode
 		self.headed = headed
 		self.profile = profile
+		self.record_video_dir = record_video_dir
 		self.running = True
 		self._server: asyncio.Server | None = None
 		self._shutdown_event: asyncio.Event | None = None
@@ -127,6 +129,7 @@ class SessionServer:
 				self.browser_mode,
 				self.headed,
 				self.profile,
+				self.record_video_dir,
 			)
 
 			# Dispatch to handler
@@ -267,6 +270,7 @@ def main() -> None:
 	parser.add_argument('--browser', default='chromium', choices=['chromium', 'real', 'remote'])
 	parser.add_argument('--headed', action='store_true', help='Show browser window')
 	parser.add_argument('--profile', help='Chrome profile (real browser mode)')
+	parser.add_argument('--record-video', help='Record video of session to directory')
 	args = parser.parse_args()
 
 	logger.info(f'Starting server for session: {args.session}')
@@ -277,6 +281,7 @@ def main() -> None:
 		browser_mode=args.browser,
 		headed=args.headed,
 		profile=args.profile,
+		record_video_dir=args.record_video,
 	)
 
 	try:

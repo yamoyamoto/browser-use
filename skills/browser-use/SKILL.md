@@ -483,6 +483,7 @@ browser-use task status <id> -v --step 10  # Inspect specific step
 | `--browser MODE` | Browser mode: chromium, real, remote |
 | `--headed` | Show browser window (chromium mode) |
 | `--profile NAME` | Browser profile (local name or cloud ID). Works with `open`, `session create`, etc. — does NOT work with `run` (use `--session-id` instead) |
+| `--record-video DIR` | Record session video to directory (saves MP4 on close). Requires `pip install "browser-use[video]"` |
 | `--json` | Output as JSON |
 | `--mcp` | Run as MCP server via stdin/stdout |
 
