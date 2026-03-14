@@ -38,6 +38,7 @@ class SessionRegistry:
 		browser_mode: str,
 		headed: bool,
 		profile: str | None,
+		record_video_dir: str | None = None,
 	) -> SessionInfo:
 		"""Get existing session or create new one."""
 		if name in self._sessions:
@@ -45,7 +46,7 @@ class SessionRegistry:
 
 		logger.info(f'Creating new session: {name} (mode={browser_mode}, headed={headed})')
 
-		browser_session = await create_browser_session(browser_mode, headed, profile)
+		browser_session = await create_browser_session(browser_mode, headed, profile, record_video_dir)
 		await browser_session.start()
 
 		session_info = SessionInfo(
@@ -101,6 +102,7 @@ async def create_browser_session(
 	mode: str,
 	headed: bool,
 	profile: str | None,
+	record_video_dir: str | None = None,
 ) -> BrowserSession:
 	"""Create BrowserSession based on mode.
 
@@ -121,6 +123,7 @@ async def create_browser_session(
 	if mode == 'chromium':
 		return BrowserSession(
 			headless=not headed,
+			record_video_dir=record_video_dir,
 		)
 
 	elif mode == 'real':
@@ -140,6 +143,7 @@ async def create_browser_session(
 			user_data_dir=user_data_dir,
 			profile_directory=profile_directory,
 			headless=not headed,  # Headless by default, --headed for visible
+			record_video_dir=record_video_dir,
 		)
 
 	elif mode == 'remote':
@@ -150,6 +154,7 @@ async def create_browser_session(
 		return BrowserSession(
 			use_cloud=True,
 			cloud_profile_id=profile,
+			record_video_dir=record_video_dir,
 		)
 
 	else:
