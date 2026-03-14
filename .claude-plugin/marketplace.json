@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "browser-use",
-      "source": ".",
+      "source": "./",
       "description": "Automates browser interactions for web testing, form filling, screenshots, video recording, and data extraction.",
       "version": "0.12.2",
       "author": {
