@@ -53,6 +53,7 @@ credentials.json
 token.json
 
 !docs/docs.json
+!.claude-plugin/*.json
 
 
 temp-profile-*

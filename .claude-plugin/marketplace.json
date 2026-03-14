@@ -1,0 +1,18 @@
+{
+  "name": "browser-use",
+  "owner": {
+    "name": "yamoyamoto",
+    "email": "yamoto9928@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "browser-use",
+      "source": ".",
+      "description": "Automates browser interactions for web testing, form filling, screenshots, video recording, and data extraction.",
+      "version": "0.12.2",
+      "author": {
+        "name": "yamoyamoto"
+      }
+    }
+  ]
+}
