@@ -53,8 +53,9 @@ browser-use state                         # Get URL, title, clickable elements
 browser-use screenshot                    # Take screenshot (base64)
 browser-use screenshot path.png           # Save screenshot to file
 
-# Interactions (use indices from state)
-browser-use click <index>                 # Click element
+# Interactions (use indices from state, or coordinates from screenshot)
+browser-use click <index>                 # Click element by index
+browser-use click <x> <y>                 # Click at viewport coordinates
 browser-use type "text"                   # Type into focused element
 browser-use input <index> "text"          # Click element, then type
 browser-use keys "Enter"                  # Send keyboard keys
@@ -103,7 +104,8 @@ browser-use screenshot --full path.png    # Full page screenshot
 
 ### Interactions
 ```bash
-browser-use click <index>                 # Click element
+browser-use click <index>                 # Click element by index
+browser-use click <x> <y>                 # Click at viewport coordinates (x, y)
 browser-use type "text"                   # Type text into focused element
 browser-use input <index> "text"          # Click element, then type text
 browser-use keys "Enter"                  # Send keyboard keys
@@ -114,7 +116,7 @@ browser-use dblclick <index>              # Double-click element
 browser-use rightclick <index>            # Right-click element (context menu)
 ```
 
-Use indices from `browser-use state`.
+Use indices from `browser-use state`. Alternatively, use `click <x> <y>` to click at specific viewport coordinates — useful when an element is not in the state list (e.g., canvas, custom widgets, or visual targets identified from a screenshot).
 
 ### JavaScript & Data
 ```bash
