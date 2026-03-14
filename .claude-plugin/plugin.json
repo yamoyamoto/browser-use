@@ -1,0 +1,12 @@
+{
+  "name": "browser-use",
+  "version": "0.12.2",
+  "description": "Automates browser interactions for web testing, form filling, screenshots, video recording, and data extraction. Use when the user needs to navigate websites, interact with web pages, fill forms, take screenshots, or extract information from web pages.",
+  "author": {
+    "name": "yamoyamoto",
+    "url": "https://github.com/yamoyamoto"
+  },
+  "homepage": "https://github.com/yamoyamoto/browser-use",
+  "repository": "https://github.com/yamoyamoto/browser-use",
+  "license": "MIT"
+}
