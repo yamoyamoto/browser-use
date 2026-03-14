@@ -36,7 +36,7 @@ browser-use --browser real --profile "Default" open <url>  # Real Chrome with yo
 browser-use --browser remote open <url>        # Cloud browser
 ```
 
-- **chromium**: Fast, isolated, headless by default
+- **chromium**: Fast, isolated, headless by default. **Prefer `--headed` on local machines** — headed mode improves element detection reliability and avoids anti-bot detection issues that can occur in headless mode
 - **real**: Uses a real Chrome binary. Without `--profile`, uses a persistent but empty CLI profile at `~/.config/browseruse/profiles/cli/`. With `--profile "ProfileName"`, copies your actual Chrome profile (cookies, logins, extensions)
 - **remote**: Cloud-hosted browser with proxy support
 
@@ -492,7 +492,7 @@ browser-use task status <id> -v --step 10  # Inspect specific step
 ## Tips
 
 1. **Always run `browser-use state` first** to see available elements and their indices
-2. **Use `--headed` for debugging** to see what the browser is doing
+2. **Prefer `--headed` on local machines** — headed mode produces more reliable element detection and interaction than headless. Headless can suffer from anti-bot detection, element visibility differences, and timing issues. Use headless only when no display is available (CI, remote servers)
 3. **Sessions persist** — the browser stays open between commands
 4. **Use `--json`** for programmatic parsing
 5. **Python variables persist** across `browser-use python` commands within a session
